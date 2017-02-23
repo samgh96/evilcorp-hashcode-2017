@@ -41,10 +41,14 @@ def preparadorendpoint ( array, endpoint, request, tamaniocache):
         for j in indicesendpoints:
             if j in resultado.keys():
                 temp = resultado[j]
-                temp.append([sum(request[i][2]), i, request[i][0])])
+                requesttmp = request[i][2]
+                indexrequestend = request[i][1].index(j)
+                temp.append([requesttmp[indexrequestend], i, request[i][0])])
                 resultado[j] = temp
             else:
-                resultado[j] = [[sum(request[i][2]), i, request[i][0])]]
+                requesttmp = request[i][2]
+                indexrequestend = request[i][1].index(j)
+                resultado[j] = [[requesttmp[indexrequestend], i, request[i][0])]]
     #Aqyui tengo un diccionarios de endpoints: [(request, indice, tamanio)]
     for i in resultado.keys():
         datos = resultado[i]
