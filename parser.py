@@ -1,4 +1,3 @@
-import string
 import sys
 
 fichero = sys.argv[1]
@@ -10,14 +9,17 @@ sys.setrecursionlimit(5500000)
 # request ---> array de diccionarios --> indicevideo: (tamanio, indiceendpoint, numrequest)
 # n --> numero de videos que necesito
 
+
 def parser():
-    with open (fichero) as f:
-        r =  f.read()
-        return r.splitlines()        
+    with open(fichero) as f:
+        r = f.read()
+        return r.splitlines()
+
 
 def setLin(new_val):
     global linfin
     linfin = new_val
+
 
 # va rellenando la lista que le pasemos con tuplas (endpoint, latencia)
 def recParserDatacenter(n_endpoint, l_t_dc, lineas, lin_actual):
@@ -32,7 +34,7 @@ def recParserDatacenter(n_endpoint, l_t_dc, lineas, lin_actual):
         l_t_dc.append((lat_ep, pEP))
         return recParserDatacenter(n_endpoint - 1, l_t_dc, lineas, lin_actual + int(mainep[1]) + 1)
 
-        
+
 def parserEndpoint(lin_actual, linea_final, lineas):
     lista_tuplas = []
     for i in range(lin_actual + 1, linea_final + 1):
@@ -42,7 +44,7 @@ def parserEndpoint(lin_actual, linea_final, lineas):
 
 
 def parserRequests(lineas, linea_in, n_vid, vid_size):
-    l_vid = [{i:[]} for i in range(n_vid)]
+    l_vid = [{i: []} for i in range(n_vid)]
     for i in range(0, len(l_vid)):
         l_vid[i].get(i).append(vid_size[i])
     for i in range(linea_in, len(lineas)):
@@ -51,9 +53,9 @@ def parserRequests(lineas, linea_in, n_vid, vid_size):
     return l_vid
 
 
-def main ():
+def main():
     lineas = parser()
-    config =  lineas[0].split(" ")
+    config = lineas[0].split(" ")
     n_vid = int(config[0])
     n_ep = int(config[1])
     n_req = config[2]
@@ -64,6 +66,6 @@ def main ():
     requests = parserRequests(lineas, linfin, n_vid, vid_size)
     print(datacenter)
     print(requests)
-    
+
+
 main()
-    
