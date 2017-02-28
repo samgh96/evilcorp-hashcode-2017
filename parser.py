@@ -3,6 +3,8 @@ import sys
 
 fichero = sys.argv[1]
 
+sys.setrecursionlimit(5500000)
+
 # datacenter --> array de latencias por endpoint
 # endpoint --> indiceendpoint: (indicecahches[0,1..], latencias[100, 200..])
 # request ---> array de diccionarios --> indicevideo: (tamanio, indiceendpoint, numrequest)
@@ -16,7 +18,7 @@ def parser():
 def setLin(new_val):
     global linfin
     linfin = new_val
-    
+
 # va rellenando la lista que le pasemos con tuplas (endpoint, latencia)
 def recParserDatacenter(n_endpoint, l_t_dc, lineas, lin_actual):
     if n_endpoint == 0:
